@@ -3,10 +3,9 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import {
   useCreatePost,
-  useDeletePost,
   useUpdatePost,
 } from "@/lib/react-query/queriesAndMutations";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,8 +36,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
   const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
     useUpdatePost();
 
-  const { mutateAsync: deletePost, isPending: isLoadingDelete } =
-    useDeletePost();
+  // const { mutateAsync: deletePost, isPending: isLoadingDelete } =
+  //   useDeletePost();
 
   const { toast } = useToast();
   const { user } = useUserContext();
@@ -66,7 +65,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
       });
 
       if (!updatedPost) {
-        toast({ title: "Please try again." });
+        toast({ title: `${action} post failed. Please try again.` });
       }
 
       return navigate(`/posts/${post.$id}`);
@@ -79,7 +78,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
     if (!newPost) {
       toast({
-        title: "Please try again.",
+        title: `${action} post failed. Please try again.`,
       });
     }
 
@@ -167,11 +166,13 @@ const PostForm = ({ post, action }: PostFormProps) => {
         />
 
         <div className="flex gap-4 items-center justify-end">
-          <Link to="/">
-            <Button type="button" className="shad-button_dark_4">
-              Cancel
-            </Button>
-          </Link>
+          <Button
+            type="button"
+            className="shad-button_dark_4"
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </Button>
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
