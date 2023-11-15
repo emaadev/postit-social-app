@@ -91,7 +91,7 @@ const PostDetails = () => {
                   />
                 </Link>
 
-                <button
+                <Button
                   onClick={handleDeletePost}
                   variant="ghost"
                   className={`${
@@ -104,7 +104,7 @@ const PostDetails = () => {
                     width={24}
                     height={24}
                   />
-                </button>
+                </Button>
               </div>
             </div>
 
