@@ -20,7 +20,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import {
   useCreateUserAccount,
-  useSignInAccount,
+  useLoginAccount,
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 
@@ -32,7 +32,7 @@ const SignupForm = () => {
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
     useCreateUserAccount();
 
-  const { mutateAsync: signInAccount } = useSignInAccount();
+  const { mutateAsync: signInAccount } = useLoginAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
