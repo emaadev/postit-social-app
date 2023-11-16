@@ -261,7 +261,8 @@ export const useGetUserById = (userId: string) => {
 
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
-  return useMutation({
+  
+  const mutation = useMutation({
     mutationFn: (user: IUpdateUser) => updateUser(user),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -272,4 +273,6 @@ export const useUpdateUser = () => {
       });
     },
   });
+
+  return mutation;
 };
